@@ -1,4 +1,4 @@
-et(header_path "${${PROJECT_NAME}_SOURCE_DIR}/include")
+set(header_path "${${PROJECT_NAME}_SOURCE_DIR}/include")
 set(header 
   ${header_path}/circle.h
   ${header_path}/tasks.h)
