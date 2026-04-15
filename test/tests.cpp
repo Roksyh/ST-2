@@ -114,7 +114,6 @@ TEST(CircleTest, ChainedSetters_MaintainConsistency) {
     c.setRadius(1.5);
     c.setFerence(18.8495); // ~ 2*PI*3
     c.setArea(50.2654);    // ~ PI*4^2
-    
     double expected_radius = 4.0;
     EXPECT_NEAR(c.getRadius(), expected_radius, 0.1);
     EXPECT_NEAR(c.getFerence(), 2.0 * PI * expected_radius, 0.1);
@@ -145,7 +144,6 @@ TEST(CircleTest, AreaToFerence_IndirectCalculation) {
     EXPECT_NEAR(c.getFerence(), calculated_ference, EPS);
 }
 
-// Дополнительный тест для проверки const-корректности геттеров
 TEST(CircleTest, Getters_AreConstCorrect) {
     const Circle c(12.3);
     EXPECT_NEAR(c.getRadius(), 12.3, EPS);
@@ -185,7 +183,7 @@ TEST(PoolTask, ConcreteArea_Calculation) {
 
 TEST(PoolTask, FenceLength_Calculation) {
     PoolCosts costs = solvePoolTask();
-    Circle outer_circle(4.0); // Радиус с учетом дорожки
+    Circle outer_circle(4.0);
     double expected_fence_length = outer_circle.getFerence();
     double actual_fence_length = costs.fence_cost / 2000.0;
     EXPECT_NEAR(actual_fence_length, expected_fence_length, EPS);
@@ -203,8 +201,6 @@ TEST(PoolTask, FenceCost_IsPositive) {
 
 TEST(PoolTask, OverallCosts_ApproximateValues) {
     PoolCosts costs = solvePoolTask();
-    // Площадь дорожки: pi*(4^2 - 3^2) = 7*pi ≈ 21.99 м^2. Стоимость: ~21991 руб.
-    // Длина ограды: 2*pi*4 = 8*pi ≈ 25.13 м. Стоимость: ~50265 руб.
     EXPECT_NEAR(costs.concrete_cost, 21991.1, 15.0);
     EXPECT_NEAR(costs.fence_cost, 50265.5, 15.0);
 }
