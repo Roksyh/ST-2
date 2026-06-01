@@ -2,6 +2,7 @@
 
 #include <gtest/gtest.h>
 #include <cmath>
+#include <stdexcept>
 #include "circle.h"
 #include "tasks.h"
 
@@ -116,6 +117,20 @@ TEST(CircleTest, LargeRadius) {
     Circle c(1e6);
     EXPECT_NEAR(2.0 * PI * 1e6, c.getFerence(), 1e-3);
     EXPECT_NEAR(PI * 1e12, c.getArea(), 1e3);
+}
+
+TEST(CircleTest, NegativeRadiusThrows) {
+    EXPECT_THROW(Circle(-1.0), std::invalid_argument);
+}
+
+TEST(CircleTest, NegativeFerenceThrows) {
+    Circle c(1.0);
+    EXPECT_THROW(c.setFerence(-5.0), std::invalid_argument);
+}
+
+TEST(CircleTest, NegativeAreaThrows) {
+    Circle c(1.0);
+    EXPECT_THROW(c.setArea(-10.0), std::invalid_argument);
 }
 
 TEST(EarthRopeTest, GapIsPositive) {
